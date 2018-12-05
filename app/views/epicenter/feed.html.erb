@@ -1,0 +1,12 @@
+<h1><%=current_user.username%>'s Feed</h1>
+
+<div class="container-fluid">
+	<% @following_tweets.each do |tweet| %>
+		<div>
+			<p><%= link_to tweet.user.username, show_user_path(id: tweet.user.id) %></p>
+			<p><%= tweet.message.html_safe %></p>
+			<h6><%= time_ago_in_words(tweet.created.at) if Time.now - tweet.created_at < 86400 %></h6>
+			<h6><%= tweet.created_at.strftime('%b%e') if Time.now - tweet.created_at >= 86400 %></h6>
+		</div>
+	<%end%>
+</div>
